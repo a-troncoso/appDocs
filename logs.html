@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<!-- <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" /> -->
+<link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+<script src="JQ/jquery.min.js"></script>
+<script src="bootstrap/js/bootstrap.min.js"></script>
+<script src="bootstrap/js/bootbox.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<title>Logs de usuarios</title>
+<script>
+$(document).ready(cargarGrupoSelect('php/consultaGruposUsuario.php', '#selectGrupoUsuario'));
+$(document).ready(buscarLogs);
+$(document).ready(buscarLogsAlCambiarDeUsuario);
+$(document).ready(cargarUsuariosPaginaAgregarDoc);
+$(document).ready(verificaFecha);
+
+function buscarLogs(){
+	// alert($('#selectUsuario').val());
+	// alert($('#fechaInicio').val());
+	// alert($('#fechaFin').val());
+	$.ajax({
+		data:({codUsuarioPHP: $('#selectUsuario').val(), fechaInicioPHP: $('#fechaInicio').val(), fechaFinPHP: $('#fechaFin').val()}),
+		url: 'php/consultaLogs.php',
+		type: 'POST',
+		dataType: 'json',
+		error: function(jqXHR,text_status,strError){
+			alert("Error al cargar los logs: \n\n" + strError);
+		},
+		timeout: 60000,
+		success: function(data){
+			if ($.isEmptyObject(data)) {
+				$('#cuerpoTabla').html('<tr><td></td><td><span id = "spanNoLogs" style = "color:red">No se encontraron logs</span></td></tr>');
+			}else{
+				$('#cuerpoTabla').html("");
+				for(var i in data){
+					$('#cuerpoTabla').append("<tr><td>" + data[i][0] + "</td><td>" + data[i][1] + "</td><td>" + data[i][2] + "</td></tr>");
+				}
+			}
+		}
+	});
+};
+function buscarLogsAlCambiarDeUsuario(){
+	$('#selectUsuario').change(buscarLogs);
+	$('#fechaInicio').change(buscarLogs);
+	$('#fechaFin').change(buscarLogs);
+	// alert($('#fechaInicio').val());
+};
+// FUNCION QUE VALIDA LOS INTERVALOS DE TIEMPO
+function verificaFecha(){
+	$('#fechaFin').change(function(){
+		if ( Date.parse($('#fechaFin').val()) < Date.parse($('#fechaInicio').val()) ) {
+			alert('La fecha de inicio no puede ser superior a la fecha de t\u00e9rmino.');
+		}
+	});
+	$('#fechaInicio').change(function(){
+		if ( Date.parse($('#fechaFin').val()) < Date.parse($('#fechaInicio').val()) ) {
+			alert('La fecha de inicio no puede ser superior a la fecha de t\u00e9rmino.');
+		}
+	});
+};
+// FUNCION QUE CARGA SOLO LOS SELECT QUE SON DE GRUPOS (AREAS, GRUPO DISCIPLINA, GRUPO TIPO DOC, GRUPO USUARIO)
+function cargarGrupoSelect(rutaPHP, contenedor){
+	$.ajax({
+		url: rutaPHP,
+		type: 'POST',
+		dataType: 'json',
+		error: function(jqXHR,text_status,strError){
+			alert("No hay coneccion");
+		},
+		timeout: 60000,
+		success: function(data){
+			for(var i in data){
+				$(contenedor).append("<option value='" + data[i][0] + "'>" + data[i][1] + "</option>");
+			}
+		}
+	});
+};
+
+function cargarUsuariosPaginaAgregarDoc(){
+	$('#selectGrupoUsuario').change(function(){
+		var optionSeleccionado = $('#selectGrupoUsuario').val();
+		//alert(optionSeleccionado);
+		$.ajax({
+			data: {optionSeleccionadoPHP: optionSeleccionado},
+			url: 'php/consultaUsuarios.php',
+			type: 'POST',
+			dataType: 'json',
+			error: function(jqXHR,text_status,strError){
+				alert("Error al cargar los usuarios\n" + strError);
+			},
+			timeout: 60000,
+			success: function(data){
+				$('#selectUsuario').html("");
+				$('#selectUsuario').append("<option value='cualquier'>Cualquier</option>");
+				for(var i in data){
+					$('#selectUsuario').append("<option value='" + data[i][0] + "'>" + data[i][1] + "</option>");
+				}
+			}
+		});
+	});
+};
+</script>
+</head>
+<body>
+	<div class="row" >
+		<div class="col-md-12 col-lg-offset-2" >
+			<form action="" class="form-horizontal" role="form">
+				<div class="form-group">
+					<div class="col-xs-2">
+						<label for="" class="control-label">Entre</label>
+					</div>
+					<div class="col-xs-2">
+						<input type="date" id = "fechaInicio" class="form-control" name="bday" min="2014-09-01">
+					</div>
+					<div class="col-xs-2">
+						<label for="" class="control-label">Y</label>
+					</div>
+					<div class="col-xs-2">
+						<input type="date" id = "fechaFin" class="form-control" name="bday" max="2019-12-30">
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-xs-2">
+						<label for="" class="control-label">Grupo usuario</label>
+					</div>
+					<div class="col-xs-2">
+						<select id="selectGrupoUsuario" class="form-control">
+							<option value="cualquier">Cualquier</option> <!--  ESTA OPCION MUESTRA TODOS LOS grupos DE PERSONAS-->
+						</select>
+					</div>
+					<div class="col-xs-2">
+						<label for="" class="control-label">Usuario</label>
+					</div>
+					<div class="col-xs-2">
+						<select id="selectUsuario" class="form-control"></select>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+	<div class="row" >
+		<div class="col-md-12 " >
+			<table class="table table-hover">
+				<thead>
+					<tr>
+						<th>USUARIO</th>
+						<th>ACCIÓN</th>
+						<th>FECHA / HORA</th>
+					</tr>
+				</thead>
+				<tbody  id="cuerpoTabla" >
+					<!-- <tr>
+						<td>Juan</td>
+						<td>Juan se logueo</td>
+						<td>14-08-2014</td>
+					</tr>-->
+				</tbody>
+			</table>
+		</div>
+	</div>
+</body>
+</html>

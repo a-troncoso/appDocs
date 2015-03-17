@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<!-- <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" /> -->
+	<script src="JQ/jquery.min.js"></script>
+	<script href="bootstrap/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+	<title>Resumen</title>
+	<script src="js/funcionesLoginResumen.js"></script>
+	<script>
+	$(document).ready(calculaCantidadDocsParaRevisar);
+	$(document).ready(redireccionarSegunTabSeleccionado);
+	$(document).ready(verificarSiEsAdm);
+	$(document).ready(verificarSiTienePermisoAgregarDocs);
+	$(document).ready(verificarSiTienePermisoBuscarVerDocs);
+	$(document).ready(cargarBuscarDocAlInicio);
+	</script>
+</head>
+<body  style="background-color: #F1F5F9">
+	<div class="row" >
+		<div class="col-md-12" >
+			<nav class="navbar navbar-default">
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+						<span class="sr-only"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+					<a href="" class="navbar-brand">Control Documental</a>
+				</div>
+				<div class="collapse navbar-collapse navbar-ex1-collapse">
+					<ul class="nav navbar-nav">
+						<li><a href="#" id="btnAgregarDoc">Agregar documento</a></li>
+						<li><a href="#" id="btnBuscarDoc">Buscar Documento</a></li>
+						<li id="liGruposUsuarios"><a href="#" id="btnGruposUsuarios">Grupos/Usuarios</a></li>
+						<li id="liLogs"><a href="#" id="btnLogs">Logs</a></li>
+						<li><a href="login.html" id="btnSalir">Salir</a></li>
+					</ul>
+					<span id="spanMsgDocsParaRevisar" style = 'position: absolute; right:7px; color: red'></span>
+				</div>
+			</nav>
+		</div>
+	</div>
+	<div class="container" id="container"></div>
+</body>
+</html>

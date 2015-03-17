@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<!-- <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" /> -->
+	<link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+	<script href="bootstrap/js/bootstrap.min.js"></script>
+	<script href="JQ/jquery.min.js"></script>
+	<script src="js/funcionesAgregarBuscarDoc.js"></script>
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+	<title>Agregar documento</title>
+	<script>
+	$(document).ready(agregarDoc);
+
+	//$(document).ready(cargarGrupoSelect('php/consultaAreas.php', '#selectAreas'));
+	$(document).ready(cargarGrupoAreasPaginaAgregarDoc);
+	//$(document).ready(cargarSubGrupoSelect('php/consultaSubAreas.php', '#selectAreas', '#selectSubAreas'));
+	$(document).ready(cargarSubAreasPaginaAgregarDoc);
+
+	//$(document).ready(cargarGrupoSelect('php/consultaGruposDisciplina.php', '#selectGrupoDisciplina'));
+	$(document).ready(cargarGrupoDisciplinasPaginaAgregarDoc);
+	//$(document).ready(cargarSubGrupoSelect('php/consultaDisciplinas.php', '#selectGrupoDisciplina', '#selectDisciplina'));
+	$(document).ready(cargarDisciplinasPaginaAgregarDoc);
+
+	//$(document).ready(cargarGrupoSelect('php/selectGruposTipoDocumento.php', '#selectGrupoTipoDocumento'));
+	$(document).ready(cargarGruposTipoDocumentoPaginaAgregarDoc);
+	//$(document).ready(cargarSubGrupoSelect('php/selectTiposDocumento.php', '#selectGrupoTipoDocumento', '#selectTipoDocumento'));
+	$(document).ready(cargarTipoDocumentoPaginaAgregarDoc);
+
+	//$(document).ready(cargarGrupoSelect('php/consultaGruposUsuario.php', '#selectGrupoUsuario'));
+	$(document).ready(cargarGruposUsuarioPaginaAgregarDoc);
+	//$(document).ready(cargarSubGrupoSelect('php/consultaUsuarios.php', '#selectGrupoUsuario', '#selectUsuario'));
+	$(document).ready(cargarUsuariosPaginaAgregarDoc);
+
+	$(document).ready(generaCodigo('#selectSubAreas'));
+	$(document).ready(generaCodigo('#selectDisciplina'));
+	$(document).ready(generaCodigo('#selectTipoDocumento'));
+	$(document).ready(generaCodigo('input[name=rdVersion]:radio'));
+	$(document).ready(cargarNumeroCorrelativoSegunDisciplina);
+	$(document).ready(nombreArchivo);
+	$(document).ready(limpiarCamposPaginaAgregarDoc);
+	// $(document).ready(consultaCorreoUsuarioSeleccionado);
+	</script>
+</head>
+<body>
+	<div class="row" >
+		<div class="col-md-12 col-lg-offset-1" >
+			<form action="" enctype="multipart/form-data" class="form-horizontal" role="form" >
+				<div class="form-group">
+					<fieldset disabled>
+						<div class="col-xs-2">
+							<label for="" class="control-label">CODIGO</label>
+						</div>
+						<div class="col-xs-3">
+							<input type="text" id ="inpCodigo" class="form-control" >
+						</div>
+					</fieldset>
+				</div>
+				<div class="form-group">
+					<div class="col-xs-2">
+						<label for="" class="control-label">Titulo documento</label>
+					</div>
+						<div class="col-xs-3">
+						<input type="text" id="inpTituloDoc" class="form-control">
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-xs-2">
+						<label for="" class="control-label">Area</label>
+					</div>
+					<div class="col-xs-3">
+						<select id="selectAreas" class="form-control">
+							<option value="cualquier">Cualquier</option> <!--  ESTA OPCION MUESTRA TODAS LAS SUBAREAS-->
+						</select>
+					</div>
+					<div class="col-xs-2">
+						<label for="" class=" control-label">Subarea</label>
+					</div>
+					<div class="col-xs-3">
+						<select id="selectSubAreas" class="form-control"></select>
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-xs-2">
+						<label for="" class=" control-label">Grupo disciplina</label>
+					</div>
+					<div class="col-xs-3">
+						<select id="selectGrupoDisciplina" class="form-control">
+							<option value="cualquier">Cualquier</option> <!--  ESTA OPCION MUESTRA TODAS LAS DISCIPLINAS-->
+						</select>
+					</div>
+					<div class="col-xs-2">
+						<label for="" class=" control-label">Disciplina</label>
+					</div>
+					<div class="col-xs-3">
+						<select id="selectDisciplina" class="form-control">
+						</select>
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-xs-2">
+						<label for="" class=" control-label">Grupo tipo documento</label>
+					</div>
+					<div class="col-xs-3">
+						<select id="selectGrupoTipoDocumento" class="form-control">
+							<option value="cualquier">Cualquier</option> <!--  ESTA OPCION MUESTRA TODOS LOS TIPOS DE DOCUMENTOS-->
+						</select>
+					</div>
+					<div class="col-xs-2">
+						<label for="" class=" control-label">Tipo documento</label>
+					</div>
+					<div class="col-xs-3">
+						<select id="selectTipoDocumento" class="form-control">
+						</select>
+					</div>
+				</div>
+
+				<div class="form-group">
+					<div class="col-xs-2">
+						<label for="" class=" control-label">Version</label>
+					</div>
+					<div class="col-xs-6">
+						<label class="radio-inline">
+							<input type="radio" name="rdVersion" id="rdVersionInterna" value="V0A"> Interna
+						</label>
+						<label class="radio-inline">
+							<input type="radio" name="rdVersion" id="rdVersionClienteRevisor" value="V0B"> Cliente/Revisor
+						</label>
+						<label class="radio-inline">
+							<input type="radio" name="rdVersion" id="idVersionAprovada" value="V00"> Version aprobada
+						</label>
+					</div>
+				</div>
+
+				<div class="form-group">
+					<div class="col-xs-2">
+						<label for="" class=" control-label">Grupo usuario</label>
+					</div>
+					<div class="col-xs-3">
+						<select id="selectGrupoUsuario" class="form-control">
+							<option value="cualquier">Cualquier</option> <!--  ESTA OPCION MUESTRA TODOS LOS grupos DE PERSONAS-->
+						</select>
+					</div>
+					<div class="col-xs-2">
+						<label for="" class=" control-label">Usuario</label>
+					</div>
+					<div class="col-xs-3">
+						<select id="selectUsuario" class="form-control">
+						</select>
+						<!-- <p class="help-block">Nota: Para seleccionar varios usuarios presione CTRL mientras hace click sobre el usuario.</p> -->
+					</div>
+				</div>
+
+				<div class="form-group">
+					<div class="col-xs-2">
+						<label for="" class=" control-label">Resumen documento</label>
+					</div>
+						<div class="col-xs-6">
+						<textarea rows="3" id="txtAreaResumenDoc" class="form-control"></textarea>
+					</div>
+
+				</div>
+				<div class="form-group">
+					<div class="col-xs-2">
+						<label for="" class=" control-label">Observaciones</label>
+					</div>
+					<div class="col-xs-6">
+						<textarea rows="3"  id="txtAreaObservacionesDoc"  class="form-control"></textarea>
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-xs-2">
+						<label for="" class=" control-label">Palabras clave</label>
+					</div>
+					<div class="col-xs-6">
+						<input type="text" id ="inpPalabrasClave" class="form-control" >
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-xs-2">
+						<label for="exampleInputFile" class=" control-label">Examinar</label>
+					</div>
+					<div class="col-xs-2">
+					<input type="file" id="archivos" class="filestyle" name="archivos">
+				</div>
+				</div>
+				<div class="col-xs-2">
+					<div class="form-group">
+						<a id="btnAgregar" class="btn btn-primary" href="#" role="button" >Agregar</a>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+</body>
+</html>

@@ -1,0 +1,37 @@
+- Open C:\PHP
+- Right Click the php.ini file in this folder and choose "Open with..." selecting your editor of choice.
+- Press Ctrl + F and type "post_max_size" (click Find...", where needed)
+- Change the value to the number of Mb you want your site to accept as uploads
+- Press Ctrl + F and type "upload_max_filesize" (click Find...", where needed)
+- Change the value to the number of Mb you want your site to accept as uploads
+- Press Ctrl + F and type "max_execution_time" (click Find...", where needed)
+- Change the value to 600
+- Press Ctrl and S or the save button.
+- Exit your editor.
+- Restart your webserver to reload PHP with the edited changes.
+
+
+PARA SERVIDORES ALOJADOS (HOSTED)
+--------------------------------
+
+Servidor alojado (hosted)
+Las cosas van a ser un poco diferentes con un servidor alojado por terceros (hosted) cuando le quiera cambiar el tamaño de archivos a subir y descargar. Probablemente le dirán que fabrique o que cambie el archivo .htaccess o que modifique al archivo php.ini.
+
+lightbulb.png	It might be a good idea to talk to with your service provider before you attempt anything. They probably have instructions on "how to" and may have their own limits for uploaded file size. Some hosts measure the file size in gigabytes and others in megabytes. If you are unhappy with their limits, then check your contract and consider changing your provider to one that has a limit and price that you like.
+.htaccess con servidor alojado (hosted)
+The one purpose of an .htaccess file is to override the the current limitations of both the server and the php.ini file. Your hosted server should inform you where that file needs be placed in your Moodle, but generally in the root is sufficient. They may already have a standard file you can use, if so, use it - but perhaps not.
+
+To the .htaccess file add the lines:
+
+ php_value upload_max_filesize 128M
+ php_value post_max_size 128M
+ 
+This will limit uploads to 128MB, but you can make it any size you agree with your provider. The wording may vary slightly, according to the demands of the server.
+
+php.ini con servidor alojado (hosted)
+Some servers will not allow you to change the moodle root .htaccess file and tell you to use a php.ini file for php directives. Here you can use the instruction located in the section above called Modificando el archivo php.ini.
+
+Find the php.ini file in your moodle subfolder on your hosted server. You might want to copy the file as a backup just in case. Edit php.ini, find "upload_max_filesize" and post_max_size in the code. After the = change the number. Here the max filesize is 20 megabytes.
+
+upload_max_filesize = 20M
+post_max_size = 20M

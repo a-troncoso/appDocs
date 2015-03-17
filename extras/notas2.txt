@@ -1,0 +1,41 @@
+MENU:
+-----
+- Ver listado de documentos y Agregar documento:
+	Administrador y usuarios permitidos; ver listado total general de archivos. Agregar documentos indicando atributos; titulo del archivo, disciplina, tipo de documento, resumen del doc, palabra clave 1, 2, 3, 4, 5, eleccion de grupos y personas para que revisarán el doc, observaciones del doc, subir archivo con toda la info anterior.
+
+- Buscar documento (por parametros):
+	Administrador y usuarios permitidos; buscar doc por: palabra clave, disciplina, tipo doc, titulo,  usuario, 
+- Resumen (total de documentos por disciplina, tipo doc, edt):
+	Administrador; ver el total de archivos que hay subidos, filtrados por disciplina, tipo de documento o edt.
+
+- Administracion de usuarios:
+	Ver usuarios, editar usuarios: cambiar nombre, apellido, email, organizacion, cambiar permisos: ver archivos, abrir archivos, subir archivos, administrador (administador tiene todos los permisos anteriores), activar o desactivar usuarios.
+- Ver registros de usuarios 
+	Administrador; cuando los usuarios se loguearon/desloguearon, subieron archivos, enviaron archivos para revision, cuando buscaron archivos. Filtrado por fecha y usuario.
+
+aministrador puede:
+-------------------
+Loguearse
+
+subir archivos
+Ver lista de archivos subidos
+buscar archivos por distintos criterios
+ver resumen de total de archivos q hay por disciplina, tipo de documento o wbs y archivos q hay por aprobar
+
+cambiar de pass
+crear grupos
+crear usuario
+asociar usuarios a grupos
+ver logeos (todo lo q han hecho los ususarios por fecha y usuario)
+Desloguarse
+
+usuarios pueden:
+----------------
+Loguearse
+subir archivos (si le han dado el permiso)
+
+Ver lista de archivos subidos (si le han dado el permiso)
+buscar archivos por distintos criterios (si le han dado el permiso)
+
+cambiar de pass
+Desloguearse

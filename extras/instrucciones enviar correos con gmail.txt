@@ -1,0 +1,32 @@
+1. Crear una cuenta gmail(en este caso se llama controldocumental02@gmail.com)
+
+2. seguir instrucciones de configuracion de mercury:
+-------------------------------------------------
+https://www.youtube.com/watch?v=rcWS1uuf304
+
+3. configurar php.ini:
+----------------------
+3.1. buscar la linea 'mail function':
+3.2. descomentar y colocar:
+
+SMTP = smtp.gmail.com
+smtp_port = 465
+sendmail_from = controldocumental02@gmail.com
+sendmail_path="C:\xampp\sendmail\sendmail.exe -t"
+
+comentar si esta descomentada la linea:
+sendmail_path="C:\xampp\mailtodisk\mailtodisk.exe"
+
+
+4. configurar sendmail.ini: (ubicado en xampp/sendmail/):
+-----------------------------------------------------
+4.1. cambiar la siguientes lineas según la cuenta gmail q se haya creado:
+
+smtp_server=smtp.gmail.com
+smtp_port=465
+smtp_ssl=ssl
+4.2. estas dos lineas serán según la cuenta gmail que se haya creado:
+----------------------------------------------------------------
+auth_username=controldocumental02@gmail.com
+auth_password=morackmorack
+

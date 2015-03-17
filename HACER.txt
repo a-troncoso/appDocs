@@ -1,0 +1,24 @@
+>>> 1.- no veo como: se trabaja con las versiones ( según correo de abajo “  La versión Cliente/Revisor va de 0B-->0C-->0D-->00 por ejemplo).
+Como habiamos hablado versiones llegan hasta 0D maximo.
+
+>>> 2.- Como agrego o modifico una sub-área. 
+ 
+Por otra parte agrego otros puntos a resolver :
+
+>>> 3.- en el menú : agregar documento/ cliente revisor: deberían desplegarse versiones de manera de saber a que versión corresponde el documento que se esta subiendo ( me refiero a versiones mayores a V0B
+
+(no entender) 4.- en el menú : agregar documento/ documento para aprobación: debería agregarse un comando que indique  “ estado de revisión”
+
+>>> 5.- en el menú : agregar documento/ documento para aprobación: debería permitirse subir documento en versión V0C o superior
+
+(no entender) 6.- en el menú : agregar documento/ documento para aprobación/ enviar comentarios: debería agregarse un menú desplegable indicando “ código de archivo”
+
+(no entender) 7.- en el menú : agregar documento/ documento para aprobación/ enviar a revision: debería agregarse un menú desplegable indicando “ código de archivo”
+
+>>> 8.- como se sube un documento en V0C o superior ( ver solicitud en correo enviado el 21/10/ 14)
+
+>>> 9.- en documentos para revisión se debería informar quien lo envío
+
+>>> 10.- Envio de correo opcional
+
+>>> 11.- Si hay archivos con el mismo nombre: se agrega un correlativo (1), (2), etc

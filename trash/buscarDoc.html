@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<!-- <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" /> -->
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+	<script src="JQ/jquery.min.js"></script>
+	<script src="bootstrap/js/bootstrap.min.js"></script>
+	<script src="bootstrap/js/bootbox.min.js"></script>
+	<script src="js/funcionesAgregarBuscarDoc.js"></script>
+	<link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+	<title>Buscar documento</title>
+	<script>
+	// $(document).ready(cargarTodosDocumentos);
+	$(document).ready(buscarDocumentosFiltrados);
+	$(document).ready(buscarTodosDocumentos);
+	$(document).ready(cargarGrupoSelect('php/consultaAreas.php', '#selectAreas'));
+	$(document).ready(cargarSubGrupoSelect('php/consultaSubAreas.php', '#selectAreas', '#selectSubAreas'));
+	$(document).ready(cargarGrupoSelect('php/consultaGruposDisciplina.php', '#selectGrupoDisciplina'));
+	$(document).ready(cargarSubGrupoSelect('php/consultaDisciplinas.php', '#selectGrupoDisciplina', '#selectDisciplina'));
+	$(document).ready(cargarGrupoSelect('php/consultaGruposUsuario.php', '#selectGrupoUsuario'));
+	$(document).ready(cargarSubGrupoSelect('php/consultaUsuarios.php', '#selectGrupoUsuario', '#selectUsuario'));
+	$(document).ready(cargarGrupoSelect('php/selectGruposTipoDocumento.php', '#selectGrupoTipoDocumento'));
+	$(document).ready(cargarSubGrupoSelect('php/selectTiposDocumento.php', '#selectGrupoTipoDocumento', '#selectTipoDocumento'));
+	$(document).ready(buscarDocumentosParaRevisar);
+	//$(document).ready(idArchivo);
+	$(document).ready(ocultarOpciones);
+	$(document).ready(abrirDialogOpcionesArchivoParaRevisar);
+	$(document).ready(abrirDialogOpcionesArchivo);
+	</script>
+</head>
+<body>
+	<div class="row" >
+		<div class="col-md-12 col-lg-offset-2" >
+			<form action="" class="form-horizontal" role="form">
+				<div id="contenedorOpciones">
+					<div class="form-group">
+						<div class="col-xs-2">
+							<label for="" class="control-label">Titulo documento</label>
+						</div>
+						<div class="col-xs-2">
+							<input type="text" id = "inpTituloDoc" class="form-control">
+						</div>
+					</div>
+					<div class="form-group">
+						<div class="col-xs-2">
+							<label for="" class="control-label">Palabra clave</label>
+						</div>
+						<div class="col-xs-2">
+							<input type="text" id="inpPalabrasClave" class="form-control">
+						</div>
+					</div>
+					<div class="form-group">
+						<div class="col-xs-2">
+							<label for="" class="control-label">Grupo disciplina</label>
+						</div>
+						<div class="col-xs-2">
+							<select id="selectGrupoDisciplina" class="form-control">
+								<option value="cualquier">Cualquier</option> <!--  ESTA OPCION MUESTRA TODAS LAS DISCIPLINAS-->
+							</select>
+						</div>
+						<div class="col-xs-2">
+							<label for="" class="control-label">Disciplina</label>
+						</div>
+						<div class="col-xs-2">
+							<select id="selectDisciplina" class="form-control">
+								<!-- <option value="cualquier">Cualquier</option> -->
+							</select>
+						</div>
+					</div>
+					<div class="form-group">
+						<div class="col-xs-2">
+							<label for="" class="control-label">Grupo tipo documento</label>
+						</div>
+						<div class="col-xs-2">
+							<select id="selectGrupoTipoDocumento" class="form-control">
+								<option value="cualquier">Cualquier</option> <!--  ESTA OPCION MUESTRA TODOS LOS TIPOS DE DOCUMENTOS-->
+							</select>
+						</div>
+						<div class="col-xs-2">
+							<label for="" class="control-label">Tipo documento</label>
+						</div>
+						<div class="col-xs-2">
+							<select id="selectTipoDocumento" class="form-control">
+								<!-- <option value="cualquier">Cualquier</option> -->
+							</select>
+						</div>
+					</div>
+					<!-- <div class="form-group">
+						<div class="col-xs-2">
+							<label for="" class="control-label">Grupo usuario</label>
+						</div>
+						<div class="col-xs-2">
+							<select id="selectGrupoUsuario" class="form-control">
+								<option value="cualquier">Cualquier</option>   ESTA OPCION MUESTRA TODOS LOS grupos DE PERSONAS
+							</select>
+						</div>
+						<div class="col-xs-2">
+							<label for="" class="control-label">Usuario</label>
+						</div>
+						<div class="col-xs-2">
+							<select id="selectUsuario" class="form-control"></select>
+						</div>
+					</div> -->
+				</div>
+					<a id="btnBuscar" class="btn btn-primary" href="#" role="button" >Buscar</a>
+					<a id="btnBuscarTodos" class="btn btn-primary" href="#" role="button" >Buscar todos</a>
+					<a id="btnDocsRevision" class="btn btn-primary" href="#" role="button" >Documentos para revisión</a>
+					<a id="btnOcultarOpciones" class="btn btn-warning" href="#" role="button" >Ocultar opciones</a>
+			</form>
+		</div>
+	</div>
+	<div class="row" >
+		<div id="contenedorTabla" class="col-md-12 " >
+			<table id = "tabla" class="table table-hover">
+				<thead>
+					<tr>
+						<th>Titulo</th>
+						<th>Codigo</th>
+						<th>Nombre Archivo</th>
+						<th>Version</th>
+						<th>Fecha subida</th>
+						<th>Resumen</th>
+						<th>Opciones</th>
+					</tr>
+				</thead>
+				<tbody id="cuerpoTabla">
+					<!-- <tr>
+						<td>Libro1</td>
+						<td>Juan</td>
+						<td>doc</td>
+						<td>archivo.doc</td>
+						<td><button type="button" class="btn btn-success">Aprovado</button></td>
+						<td>etc</td>
+						<td>etc</td>
+					</tr> -->
+				</tbody>
+			</table>
+		</div>
+	</div>
+	<!-- </div> -->
+</body>
+</html>

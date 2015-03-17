@@ -1,0 +1,1 @@
+La BD y los HTML se configuran en utf8_general_ci y utf-8, respectivamente. Los php en ISO-8859-1: antes de seleccionar la base de datos agregar: mysql_set_charset('ISO-8859-1');. CAda vez q se haga un insert se usa: mysql_query(utf8_decode("sentencia SQL"))
